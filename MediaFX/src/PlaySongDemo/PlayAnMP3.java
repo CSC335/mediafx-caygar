@@ -28,9 +28,10 @@ public class PlayAnMP3 extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     BorderPane pane = new BorderPane();
-    String path = "songfiles/Capture.mp3";
+    String path = "songfiles/SwingCheese.mp3";
     pane.setCenter( new Label(path));
     playASong(path);
+    System.out.println("Playing " + path+ "!");
     // Put the pane in a sized Scene and show the GUI
     Scene scene = new Scene(pane, 255, 85); // 255 pixels wide, 85 pixels tall
     stage.setScene(scene);
@@ -45,6 +46,8 @@ public class PlayAnMP3 extends Application {
     File file = new File(path);
     URI uri = file.toURI();
     System.out.println(uri);
+    
+    
     // Play one mp3 and and have code run when the song ends
     Media media = new Media(uri.toString());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -58,8 +61,8 @@ public class PlayAnMP3 extends Application {
   private class Waiter implements Runnable {
     @Override
     public void run() {
-      songsPlayed++;
       System.out.println("Song ended, play song #" + songsPlayed);
+      songsPlayed++;
       Platform.exit();
     }
   }
